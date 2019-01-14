@@ -31,20 +31,23 @@ app.get("/scrape", function(req, res) {
     //Load into cheerio
     var $ = cheerio.load(response.data);
     //Grab every h3 within an article tag
-    $("article").each(function(i, element) {
+    $("div.archive-text").each(function(i, element) {
       //create empty result object
       var result = {};
       //add title, summary, and href of every link to object
-      result.title = $(this)
-        .children("h3.entry-title")
+      result.title = $(element)
+        .find("h3.entry-title")
+        .find("a")
         .text();
-      result.summary = $(this)
+      result.summary = $(element)
         .children("div.entry-summary")
-        .text();
-      result.link = $(this)
-        .children("h3.entry-title")
-        .children("a")
+        .text()
+        .slice(2, -2);
+      result.link = $(element)
+        .find("h3.entry-title")
+        .find("a")
         .attr("href");
+
       //Create new Article using result object
       db.Article.create(result)
         .then(function(dbArticle) {
