@@ -8,7 +8,7 @@ const cheerio = require("cheerio");
 //Require data models
 const db = require("./models");
 
-const port = 3013;
+const PORT = 3013;
 
 //Initialize express
 const app = express();
@@ -27,7 +27,7 @@ mongoose.connect("mongodb://localhost/dailyAbyss", { useNewUrlParser: true });
 //GET route for scraping Truthout website
 app.get("/scrape", function(req, res) {
   //Grab html body
-  axios.get("http://www.truthout.org/latest/").then(function(response) {
+  axios.get("https://www.truthout.org/latest/").then(function(response) {
     //Load into cheerio
     var $ = cheerio.load(response.data);
     //Grab every h3 within an article tag
@@ -59,6 +59,10 @@ app.get("/scrape", function(req, res) {
   });
 });
 
+//Start server
+app.listen(PORT, function() {
+  console.log("App listening on port " + PORT);
+});
 
 
 
