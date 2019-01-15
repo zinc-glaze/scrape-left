@@ -30,7 +30,7 @@ mongoose.connect("mongodb://localhost/dailyAbyss", { useNewUrlParser: true });
 //ROUTES
 
 //GET route for scraping Truthout website
-app.get("/scrape", function(req, res) {
+app.get("/", function(req, res) {
   //Grab html body
   axios.get("https://www.truthout.org/latest/").then(function(response) {
     //Load into cheerio
@@ -63,8 +63,26 @@ app.get("/scrape", function(req, res) {
         });
     });
     //Send scrape confirmation to client
-    res.send("Scrape Complete");
+    //res.send("Scrape Complete");
+
+    //Get all articles and render to index view
+    db.Article.find({})
+    .then(function(dbArticle) {
+      //Make data object for handlebars
+      var hbsObject = {
+        articles: dbArticle
+      };
+      //log new data object to server console
+      console.log(hbsObject);
+      //render view with data
+      res.render("index", hbsObject);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
   });
+  
 });
 
 //Start server
