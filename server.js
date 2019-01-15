@@ -63,27 +63,30 @@ app.get("/", function(req, res) {
         });
     });
     //Send scrape confirmation to client
-    //res.send("Scrape Complete");
-
-    //Get all articles and render to index view
-    db.Article.find({})
-    .then(function(dbArticle) {
-      //Make data object for handlebars
-      var hbsObject = {
-        articles: dbArticle
-      };
-      //log new data object to server console
-      console.log(hbsObject);
-      //render view with data
-      res.render("index", hbsObject);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
+    res.send("Scrape Complete");
   });
-  
 });
+
+//GET route to find and render saved articles
+app.get("/saved", function(req, res) {
+  //Get all articles and render to index view
+  db.Article.find({})
+  .then(function(dbArticle) {
+    //Make data object for handlebars
+    var hbsObject = {
+      articles: dbArticle
+    };
+    //log new data object to server console
+    console.log(hbsObject);
+    //render view with data
+    res.render("index", hbsObject);
+  })
+  .catch(function(err) {
+    // If an error occurred, send it to the client
+    res.json(err);
+  });
+});
+
 
 //Start server
 app.listen(PORT, function() {
