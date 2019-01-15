@@ -13,6 +13,11 @@ const PORT = 3013;
 //Initialize express
 const app = express();
 
+//Handlebars
+const exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 //Middleware
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
