@@ -35,54 +35,58 @@ app.get("/", function(req, res) {
   axios.get("https://www.truthout.org/latest/").then(function(response) {
     //Load into cheerio
     var $ = cheerio.load(response.data);
-    //empty array for scrape results
-    var scrapeResults = [];
     //Grab every h3 within an article tag
     $("div.archive-text").each(function(i, element) {
       //create empty result object
-      var result = {};
+      var scrapeResults = {};
       //add title, summary, and href of every link to object
-      result.title = $(element)
+      scrapeResults.title = $(element)
         .find("h3.entry-title")
         .find("a")
         .text();
-      result.summary = $(element)
+      scrapeResults.summary = $(element)
         .children("div.entry-summary")
         .text()
         .slice(2, -2);
-      result.link = $(element)
+      scrapeResults.link = $(element)
         .find("h3.entry-title")
         .find("a")
         .attr("href");
-      //push each article to array
-      scrapeResults.push(result);
+      // Create new Article using scrapeResults object
+      db.Article.create(scrapeResults)
+      .then(function(dbArticle) {
+        console.log(dbArticle);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
     });
-    // res.json(scrapeResults);
-    //Make data object for handlebars
-    var hbsObject = {
-      articles: scrapeResults
-    };
-    // render scraped articles to index template
-    res.render("index", hbsObject);
-    //Send scrape confirmation to client
-    // res.send("Scrape Complete");
+  })
+  .then(function() {
+    db.Article.find({ saved: false })
+    .then(function(dbArticle) {
+      //Make data object for handlebars
+      var hbsObject = {
+        articles: dbArticle
+      };
+      //log new data object to server console
+      console.log(hbsObject);
+      //render view with data
+      res.render("index", hbsObject);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
   });
 });
 
-//POST route to save article to db on button click
-//Create new Article using result object
-// db.Article.create(result)
-// .then(function(dbArticle) {
-//   console.log(dbArticle);
-// })
-// .catch(function(err) {
-//   console.log(err);
-// });
+//POST api route to update article saved status on save button click
 
-//GET route to find and render saved articles
+
+//GET html route to find and render saved articles
 app.get("/saved", function(req, res) {
   //Get all articles and render to index view
-  db.Article.find({})
+  db.Article.find({ saved: true })
   .then(function(dbArticle) {
     //Make data object for handlebars
     var hbsObject = {
