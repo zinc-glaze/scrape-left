@@ -13,6 +13,9 @@ const exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+//Serve static content from "public" directory
+app.use(express.static("public"));
+
 //Middleware
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
