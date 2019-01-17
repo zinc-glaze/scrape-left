@@ -41,7 +41,7 @@ module.exports = function(app) {
       });
     })
     .then(function() {
-      db.Article.find({ saved: false }).sort({ _id:1 })
+      db.Article.find({ saved: false }).sort({ _id:-1 })
       .then(function(dbArticle) {
         //Make data object for handlebars
         var hbsObject = {
@@ -61,7 +61,7 @@ module.exports = function(app) {
   //GET html route to find and render saved articles
   app.get("/saved", function(req, res) {
     //Get all articles and render to index view
-    db.Article.find({ saved: true }).sort({ _id:1 })
+    db.Article.find({ saved: true }).sort({ _id:-1 })
     .then(function(dbArticle) {
       //Make data object for handlebars
       var hbsObject = {

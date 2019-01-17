@@ -1,5 +1,10 @@
 $(function() {
 
+  //Initialize Materialize modals
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+
   //Save article on button click
   $(".save-article").on("click", function(event) {
     let articleId = $(this).attr("data-id");

@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col s12">
       {{#each articles}}
+        <!-- Article --->
         <div class="card">
           <div class="card-content">
             <span class="card-title">
@@ -13,8 +14,18 @@
             <p><a target="_blank" href={{{link}}}>{{link}}</a></p>
           </div>
           <div class="card-action">
-            <a class="waves-effect waves-light btn view-notes" data-id={{{_id}}}>Notes</a>
-            <a class="waves-effect waves-light btn delete-article" data-id={{{_id}}}>Delete</a>
+            <button class="waves-effect waves-light btn modal-trigger view-notes" data-target={{{_id}}} data-id={{{_id}}}>View Notes</button>
+            <button class="waves-effect waves-light btn delete-article" data-id={{{_id}}}>Delete Article</button>
+          </div>
+        </div>
+        <!-- Notes Modal -->
+        <div id={{{_id}}} class="modal">
+          <div class="modal-content">
+            <h4>Notes for: </h4><h5>{{title}}</h5>
+            <p>A bunch of text</p>
+          </div>
+          <div class="modal-footer">
+            <button class="modal-close waves-effect waves-green btn-flat">Save</button>
           </div>
         </div>
       {{/each}}
