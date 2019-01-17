@@ -1,5 +1,5 @@
 {
-  "name": "daily-abyss",
+  "name": "scrape-left",
   "version": "1.0.0",
   "description": "Zeke Graves Mongoose/Cheerio Homework",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zinc-glaze/daily-abyss.git"
+    "url": "git+https://github.com/zinc-glaze/scrape-left.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zinc-glaze/daily-abyss/issues"
+    "url": "https://github.com/zinc-glaze/scrape-left/issues"
   },
-  "homepage": "https://github.com/zinc-glaze/daily-abyss#readme",
+  "homepage": "https://github.com/zinc-glaze/scrape-left#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
