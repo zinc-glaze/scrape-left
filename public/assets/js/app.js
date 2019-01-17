@@ -28,7 +28,19 @@ $(function() {
     }).then(function() {
       console.log("Article" + articleId + "deleted");
       location.reload();
-    })
-  })
+    });
+  });
+
+  //Get article and populate notes on button click
+  $(".view-notes").on("click", function(event) {
+    let articleId = $(this).attr("data-id");
+
+    $.ajax("api/article/" + articleId, {
+      type: "GET",
+      data: articleId
+    }).then(function() {
+      console.log("Article" + articleId + "Notes viewed");
+    });
+  });
 
 });
