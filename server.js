@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //Connect to Mongo DB
-mongoose.connect("mongodb://localhost/dailyAbyss", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/scrapeLeftDB", { useNewUrlParser: true, useCreateIndex: true });
 
 //Point to Routes
 require("./routes/apiRoutes")(app);

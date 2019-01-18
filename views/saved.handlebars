@@ -20,13 +20,7 @@
         </div>
         <!-- Notes Modal -->
         <div id={{{_id}}} class="modal">
-          <div class="modal-content">
-            <h4>Notes for: </h4><h5>{{title}}</h5>
-            <p>A bunch of text</p>
-          </div>
-          <div class="modal-footer">
-            <button class="modal-close waves-effect waves-green btn-flat">Save</button>
-          </div>
+          {{> notes}}
         </div>
       {{/each}}
     </div>

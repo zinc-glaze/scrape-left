@@ -6,7 +6,7 @@ $(function() {
   });
 
   //Save article on button click
-  $(".save-article").on("click", function(event) {
+  $(document).on("click", ".save-article", function() {
     let articleId = $(this).attr("data-id");
 
     $.ajax("api/save/" + articleId, {
@@ -19,7 +19,7 @@ $(function() {
   });
 
   //Delete article on button click
-  $(".delete-article").on("click", function(event) {
+  $(document).on("click", ".delete-article", function() {
     let articleId = $(this).attr("data-id");
 
     $.ajax("api/delete/" + articleId, {
@@ -32,14 +32,14 @@ $(function() {
   });
 
   //Get article and populate notes on button click
-  $(".view-notes").on("click", function(event) {
+  $(document).on("click", ".view-notes", function() {
     let articleId = $(this).attr("data-id");
 
     $.ajax("api/article/" + articleId, {
       type: "GET",
       data: articleId
     }).then(function() {
-      console.log("Article" + articleId + "Notes viewed");
+      console.log("Article" + articleId + " Notes Viewed");
     });
   });
 

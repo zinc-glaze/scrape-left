@@ -20,7 +20,7 @@ module.exports = function(app) {
     });
   });
 
-  //DELETE route to update saved status on "save" button click
+  //DELETE route to delete article on "delete" button click
   app.delete("/api/delete/:id", function(req, res) {
     //Find article by id and update saved status
     db.Article.remove({ _id : req.params.id })
@@ -34,12 +34,19 @@ module.exports = function(app) {
   });
 
   //Get Article by id, populate with Note
-  app.get("api/article/:id", function(req, res) {
+  app.get("/api/article/:id", function(req, res) {
     //Find note by id
     db.Article.findOne({ _id: req.params.id })
       .populate("note")
       .then(function(dbArticle) {
-        res.json(dbArticle);
+        //Make data object for handlebars
+        var hbsObject = {
+          articles: dbArticle
+        };
+        //log new data object to server console
+        console.log(hbsObject);
+        //render view with data
+        res.render("notes", hbsObject);
       })
       .catch(function(err) {
         res.json(err);
