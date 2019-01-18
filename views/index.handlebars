@@ -1,20 +1,41 @@
+<nav>
+  <div class="container">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Scrape Left</a>
+      <a href="#" data-target="side-burger" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/saved">Saved Articles</a></li>
+        <li><a href="collapsible.html" class="waves-effect waves-light btn">Scrape New Articles</a></li>
+        <li><a href="mobile.html" class="waves-effect waves-light btn">Clear Articles</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<ul class="sidenav" id="side-burger">
+  <li><a href="/saved">Saved Articles</a></li>
+  <li><a href="collapsible.html" class="waves-effect waves-light btn">Scrape New Articles</a></li>
+  <li><a href="mobile.html" class="waves-effect waves-light btn">Clear Scraped Articles</a></li>
+</ul>
+
 <div class="container">
   <div class="row">
     <div class="col s12">
       {{#each articles}}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">
-              {{title}}
-            </span>
-            <p>
-              {{summary}}
-            </p>
-            <p><a target="_blank" href={{{link}}}>{{link}}</a></p>
-          </div>
-          <div class="card-action">
-            <button class="waves-effect waves-light btn save-article" data-id={{{_id}}}>Save</button>
-            <button class="waves-effect waves-light btn delete-article" data-id={{{_id}}}>Delete</button>
+        <div class="row">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                <a target="_blank" href={{{link}}}>{{title}}</a>
+              </span>
+              <p>
+                {{summary}}
+              </p>
+            </div>
+            <div class="card-action">
+              <button class="waves-effect waves-light btn save-article" data-id={{{_id}}}>Save Article</button>
+              <button class="waves-effect waves-light btn delete-article" data-id={{{_id}}}>Not Interested</button>
+            </div>
           </div>
         </div>
       {{/each}}

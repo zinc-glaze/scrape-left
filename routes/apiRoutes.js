@@ -39,14 +39,25 @@ module.exports = function(app) {
     db.Article.findOne({ _id: req.params.id })
       .populate("note")
       .then(function(dbArticle) {
-        //Make data object for handlebars
-        var hbsObject = {
-          articles: dbArticle
-        };
-        //log new data object to server console
-        console.log(hbsObject);
-        //render view with data
-        res.render("notes", hbsObject);
+        if (dbArticle.note) {
+          //Make data object for handlebars
+          var hbsObject = {
+            articles: dbArticle
+          };
+          //log new data object to server console
+          console.log("It has a note!");
+          //render view with data
+          res.render("partials/notes", hbsObject);
+        } else {
+          //Make data object for handlebars
+          var hbsObject = {
+            articles: dbArticle
+          };
+          //log new data object to server console
+          console.log("There is no note!");
+          //render view with data
+          res.render("partials/notes", hbsObject);
+        }
       })
       .catch(function(err) {
         res.json(err);

@@ -6,21 +6,26 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              {{title}}
+              <a target="_blank" href={{{link}}}>{{title}}</a>
             </span>
             <p>
               {{summary}}
             </p>
-            <p><a target="_blank" href={{{link}}}>{{link}}</a></p>
           </div>
           <div class="card-action">
             <button class="waves-effect waves-light btn modal-trigger view-notes" data-target={{{_id}}} data-id={{{_id}}}>View Notes</button>
-            <button class="waves-effect waves-light btn delete-article" data-id={{{_id}}}>Delete Article</button>
+            <button class="waves-effect waves-light btn delete-article" data-id={{{_id}}}>Delete From Saved</button>
           </div>
         </div>
         <!-- Notes Modal -->
         <div id={{{_id}}} class="modal">
-          {{> notes}}
+          <div class="modal-content">
+            <h4>Notes for: </h4><h5>{{title}}</h5>
+            {{> notes}}
+          </div>
+          <div class="modal-footer">
+            <button class="modal-close waves-effect waves-green btn-flat">Save</button>
+          </div>
         </div>
       {{/each}}
     </div>

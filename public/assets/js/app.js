@@ -1,5 +1,10 @@
 $(function() {
 
+  //Initialize Materialize side-nav
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
   //Initialize Materialize modals
   $(document).ready(function(){
     $('.modal').modal();
