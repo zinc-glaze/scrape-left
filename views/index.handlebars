@@ -5,8 +5,8 @@
       <a href="#" data-target="side-burger" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/saved">Saved Articles</a></li>
-        <li><a href="collapsible.html" class="waves-effect waves-light btn">Scrape New Articles</a></li>
-        <li><a href="mobile.html" class="waves-effect waves-light btn">Clear Articles</a></li>
+        <li><a class="waves-effect waves-light btn scrape-new">Scrape New Articles</a></li>
+        <li><a class="waves-effect waves-light btn clear-scraped">Clear Articles</a></li>
       </ul>
     </div>
   </div>
@@ -14,8 +14,8 @@
 
 <ul class="sidenav" id="side-burger">
   <li><a href="/saved">Saved Articles</a></li>
-  <li><a href="collapsible.html" class="waves-effect waves-light btn">Scrape New Articles</a></li>
-  <li><a href="mobile.html" class="waves-effect waves-light btn">Clear Scraped Articles</a></li>
+  <li><button class="waves-effect waves-light btn scrape-new">Scrape New Articles</button></li>
+  <li><button class="waves-effect waves-light btn clear-scraped">Clear Articles</button></li>
 </ul>
 
 <div class="container">
@@ -34,7 +34,6 @@
             </div>
             <div class="card-action">
               <button class="waves-effect waves-light btn save-article" data-id={{{_id}}}>Save Article</button>
-              <button class="waves-effect waves-light btn delete-article" data-id={{{_id}}}>Not Interested</button>
             </div>
           </div>
         </div>
