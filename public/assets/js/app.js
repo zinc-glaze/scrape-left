@@ -50,11 +50,27 @@ $(function() {
   $(document).on("click", ".save-article", function() {
     let articleId = $(this).attr("data-id");
 
-    $.ajax("api/save/" + articleId, {
-      type: "PUT",
+    $.ajax("api/save/article/" + articleId, {
+      method: "PUT",
       data: articleId
     }).then(function() {
       console.log("Article" + articleId + "saved");
+      location.reload();
+    });
+  });
+
+  //Save note on button click
+  $(document).on("click", ".save-note", function() {
+    let noteId = $(this).attr("data-id");
+
+    $.ajax("api/save/note/" + noteId, {
+      method: "POST",
+      data: {
+        body: $("#note-input").val().trim()
+      }
+    }).then(function() {
+      console.log("Note " + noteId + " saved");
+      $("#note-input").val("");
       location.reload();
     });
   });
@@ -64,7 +80,7 @@ $(function() {
     let articleId = $(this).attr("data-id");
 
     $.ajax("api/delete/" + articleId, {
-      type: "DELETE",
+      method: "DELETE",
       data: articleId
     }).then(function() {
       console.log("Article" + articleId + "deleted");
@@ -77,11 +93,12 @@ $(function() {
     let articleId = $(this).attr("data-id");
 
     $.ajax("api/articles/" + articleId, {
-      type: "GET",
+      method: "GET",
       data: articleId
     }).then(function() {
       console.log("Article" + articleId + " Notes Viewed");
     });
   });
+
 
 });

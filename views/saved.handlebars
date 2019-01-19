@@ -1,20 +1,19 @@
-<nav>
+<nav class="blue-grey darken-1">
   <div class="container">
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo">Scrape Left</a>
+      <a href="/" class="brand-logo"><i class="material-icons">chevron_left</i><i class="material-icons">chevron_left</i>Scrape Left</a>
       <a href="#" data-target="side-burger" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="/">Home</a></li>
-        <li><a class="waves-effect waves-light btn clear-saved">Clear Articles</a></li>
+        <li><a href="/">HOME</a></li>
+        <li><a class="waves-effect waves-light btn-small clear-saved">Clear Saved Articles</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 <ul class="sidenav" id="side-burger">
-  <li><a href="/saved">Saved Articles</a></li>
-  <li><button class="waves-effect waves-light btn scrape-new">Scrape New Articles</button></li>
-  <li><button class="waves-effect waves-light btn clear-scraped">Clear Articles</button></li>
+  <li><a href="/" class="center-align">HOME</a></li>
+  <li><a class="waves-effect waves-light btn-small clear-saved">Clear Saved Articles</a></li>
 </ul>
 
 <div class="container">
@@ -39,11 +38,21 @@
         <!-- Notes Modal -->
         <div id={{{_id}}} class="modal">
           <div class="modal-content">
-            <h4>Notes for: </h4><h5>{{title}}</h5>
+            <h5 class="center-align">Notes for: <span>{{title}}</span></h5>
             {{> notes}}
+            <div class="row">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="note-input" class="materialize-textarea"></textarea>
+                    <label for="note-input">New Note</label>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
           <div class="modal-footer">
-            <button class="modal-close waves-effect waves-green btn-flat">Save</button>
+            <button class="modal-close waves-effect waves-green btn-flat save-note" data-id={{{_id}}}>Save</button>
           </div>
         </div>
       {{/each}}

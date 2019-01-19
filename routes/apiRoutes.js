@@ -70,11 +70,24 @@ module.exports = function(app) {
   });
 
   //PUT route to update saved status on "save" button click
-  app.put("/api/save/:id", function(req, res) {
+  app.put("/api/save/article/:id", function(req, res) {
     //Find article by id and update saved status
     db.Article.update({ _id : req.params.id }, {$set: {saved: true}})
     .then(function(dbArticle) {
       res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+  });
+
+  //POST route to save note
+  app.post("/api/save/note/:id", function(req, res) {
+    //Save note with id
+    db.Note.create(req.body)
+    .then(function(dbNote) {
+      res.json(dbNote);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
