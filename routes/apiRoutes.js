@@ -82,12 +82,16 @@ module.exports = function(app) {
     });
   });
 
-  //POST route to save note
+  //POST route to save new note
   app.post("/api/save/note/:id", function(req, res) {
     //Save note with id
     db.Note.create(req.body)
     .then(function(dbNote) {
-      res.json(dbNote);
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, { notes: dbNote._id }, { new: true });
+    })
+    .then(function(dbArticle){
+      res.json(dbArticle);
+      console.log(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
@@ -108,31 +112,20 @@ module.exports = function(app) {
       });
   });
 
-  //Get Article by id, populate with Note
+  //GET Article by id, populate with Note
   app.get("/api/articles/:id", function(req, res) {
     //Find note by id
     db.Article.findOne({ _id: req.params.id })
-      .populate("note")
+      .populate("notes")
       .then(function(dbArticle) {
-        if (dbArticle.note) {
-          //Make data object for handlebars
-          var hbsObject = {
-            articles: dbArticle
-          };
-          //log new data object to server console
-          console.log("It has a note!");
-          //render view with data
-          res.render("partials/notes", hbsObject);
-        } else {
-          //Make data object for handlebars
-          var hbsObject = {
-            articles: dbArticle
-          };
-          //log new data object to server console
-          console.log("There is no note!");
-          //render view with data
-          res.render("partials/notes", hbsObject);
-        }
+        //Make data object for handlebars
+        var hbsObject = {
+          articles: dbArticle
+        };
+        //log new data object to server console
+        console.log(dbArticle);
+        //render view with data
+        res.render("partials/notes", hbsObject);
       })
       .catch(function(err) {
         res.json(err);
