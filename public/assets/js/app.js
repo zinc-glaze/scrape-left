@@ -7,7 +7,9 @@ $(function() {
 
   //Initialize Materialize modals
   $(document).ready(function(){
-    $('.modal').modal();
+    $('.modal').modal({
+      onCloseEnd: function() { location.reload(); }
+    });
   });
 
   //Scrape new articles on button click
@@ -94,9 +96,19 @@ $(function() {
 
     $.ajax("api/articles/" + articleId, {
       method: "GET",
-      data: articleId
-    }).then(function() {
-      console.log("Article" + articleId + " Notes Viewed");
+    }).then(function(result) {
+      console.log(result);
+
+      if (result.notes.length == 0) {
+        $("#note-area").append("<p>" + result.summary + "</p>");
+        console.log("No notes!");
+      } 
+      else {
+        for (i in result.notes) {
+          $("#note-area").append("<p>" + result.notes[i].body + "</p>");
+          console.log("Yes notes!");
+        }
+      }
     });
   });
 

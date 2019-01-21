@@ -118,14 +118,19 @@ module.exports = function(app) {
     db.Article.findOne({ _id: req.params.id })
       .populate("notes")
       .then(function(dbArticle) {
+        // let notesArray = [];
+        // for (i=0; i < dbArticle.notes.length; i++) {
+        //   notesArray.push(dbArticle.notes[i].body);
+        // }
+        // console.log(notesArray);
         //Make data object for handlebars
-        var hbsObject = {
-          articles: dbArticle
-        };
+        // var notesObject = {
+        //   comments: notesArray
+        // };
         //log new data object to server console
-        console.log(dbArticle);
+        // console.log(notesObject);
         //render view with data
-        res.render("partials/notes", hbsObject);
+        res.json(dbArticle);
       })
       .catch(function(err) {
         res.json(err);
