@@ -82,8 +82,10 @@ module.exports = function(app) {
     });
   });
 
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //POST route to save new note
   app.post("/api/save/note/:id", function(req, res) {
+    console.log(req.body);
     //Save note with id
     db.Note.create(req.body)
     .then(function(dbNote) {
@@ -91,7 +93,6 @@ module.exports = function(app) {
     })
     .then(function(dbArticle){
       res.json(dbArticle);
-      console.log(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client

@@ -61,19 +61,20 @@ $(function() {
     });
   });
 
+  //!!!!!!!!!!!!!!!!!!!!!!!!!
   //Save note on button click
-  $(document).on("click", ".save-note", function() {
+  $(".save-note").on("click", function() {
     let noteId = $(this).attr("data-id");
 
     $.ajax("api/save/note/" + noteId, {
       method: "POST",
       data: {
-        body: $("#note-input").val().trim()
+        body: $("*[note-id="+noteId+"]").val().trim()
       }
     }).then(function() {
       console.log("Note " + noteId + " saved");
-      $("#note-input").val("");
-      location.reload();
+      $("*[note-id="+noteId+"]").empty;
+      //location.reload();
     });
   });
 
@@ -90,6 +91,7 @@ $(function() {
     });
   });
 
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //Get saved article and populate notes on button click
   $(document).on("click", ".view-notes", function() {
     let articleId = $(this).attr("data-id");
@@ -98,16 +100,12 @@ $(function() {
       method: "GET",
     }).then(function(result) {
       console.log(result);
-
-      if (result.notes.length == 0) {
-        $("#note-area").append("<p>" + result.summary + "</p>");
-        console.log("No notes!");
-      } 
-      else {
-        for (i in result.notes) {
-          $("#note-area").append("<p>" + result.notes[i].body + "</p>");
-          console.log("Yes notes!");
-        }
+      for (i in result.notes) {
+        let cardDiv = $("<div>");
+        cardDiv.addClass("card-panel");
+        let cardText = $("<span>" + result.notes[i].body + "</span>");
+        cardDiv.append(cardText); 
+        $("*[note-area-id="+articleId+"]").append(cardDiv);
       }
     });
   });
