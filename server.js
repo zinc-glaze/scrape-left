@@ -26,8 +26,7 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/scrapeLeftDB", { useNewUrlParser: true, useCreateIndex: true });
 
 //Point to Routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("./routes/routes")(app);
 
 //Start server
 app.listen(PORT, function() {

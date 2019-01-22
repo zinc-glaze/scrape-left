@@ -7,6 +7,44 @@ const db = require("../models");
 
 module.exports = function(app) {
 
+  //Find scraped (but unsaved) articles and render to "index" template
+  app.get("/", function(req, res) {
+    db.Article.find({ saved: false }).sort({ _id:-1 })
+    .then(function(dbArticle) {
+      //Make data object for handlebars
+      var hbsObject = {
+        articles: dbArticle
+      };
+      //log new data object to server console
+      console.log(hbsObject);
+      //render view with data
+      res.render("index", hbsObject);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+  });
+
+  //Find saved articles and render to "saved" template
+  app.get("/saved", function(req, res) {
+    db.Article.find({ saved: true }).sort({ _id:-1 })
+    .then(function(dbArticle) {
+      //Make data object for handlebars
+      var hbsObject = {
+        articles: dbArticle
+      };
+      //log new data object to server console
+      console.log(hbsObject);
+      //render view with data
+      res.render("saved", hbsObject);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+  });
+
   //Scrape articles and save to database
   app.post("/scrape", function(req, res) {
     //Grab html body
@@ -82,7 +120,6 @@ module.exports = function(app) {
     });
   });
 
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //POST route to save new note
   app.post("/api/save/note/:id", function(req, res) {
     console.log(req.body);
@@ -119,18 +156,6 @@ module.exports = function(app) {
     db.Article.findOne({ _id: req.params.id })
       .populate("notes")
       .then(function(dbArticle) {
-        // let notesArray = [];
-        // for (i=0; i < dbArticle.notes.length; i++) {
-        //   notesArray.push(dbArticle.notes[i].body);
-        // }
-        // console.log(notesArray);
-        //Make data object for handlebars
-        // var notesObject = {
-        //   comments: notesArray
-        // };
-        //log new data object to server console
-        // console.log(notesObject);
-        //render view with data
         res.json(dbArticle);
       })
       .catch(function(err) {

@@ -61,7 +61,6 @@ $(function() {
     });
   });
 
-  //!!!!!!!!!!!!!!!!!!!!!!!!!
   //Save note on button click
   $(".save-note").on("click", function() {
     let noteId = $(this).attr("data-id");
@@ -74,7 +73,6 @@ $(function() {
     }).then(function() {
       console.log("Note " + noteId + " saved");
       $("*[note-id="+noteId+"]").empty;
-      //location.reload();
     });
   });
 
@@ -91,7 +89,6 @@ $(function() {
     });
   });
 
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //Get saved article and populate notes on button click
   $(document).on("click", ".view-notes", function() {
     let articleId = $(this).attr("data-id");
@@ -109,6 +106,4 @@ $(function() {
       }
     });
   });
-
-
 });
