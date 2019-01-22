@@ -3,7 +3,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-const PORT = process.env.port || 3013;
+let PORT = process.env.port || 3013;
 
 //Initialize express
 const app = express();
@@ -23,7 +23,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //Connect to Mongo DB
-mongoose.connect("mongodb://localhost/scrapeLeftDB", { useNewUrlParser: true, useCreateIndex: true });
+let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapeLeftDB";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true });
 
 //Point to Routes
 require("./routes/routes")(app);
