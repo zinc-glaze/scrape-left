@@ -3,7 +3,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-let PORT = process.env.port || 3013;
+let PORT = process.env.PORT || 3013;
 
 //Initialize express
 const app = express();
