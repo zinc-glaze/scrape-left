@@ -1,4 +1,4 @@
-# scrape-left
+# Scrape Left (News Scraper App)
 ## UNC Coding Bootcamp MongoDB Homework  1-22-2019
 
 This app allows the user to easily scrape the most recent articles from Truthout.org, save them to a database, and display them in a single list with a summary and link. Once scraped, the articles can be saved and commented on. From the Saved view, the user can add notes which are then saved and displayed with the relevant article. Articles can also be deleted.  
